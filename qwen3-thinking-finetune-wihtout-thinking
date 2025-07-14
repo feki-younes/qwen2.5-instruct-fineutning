@@ -1372,12 +1372,10 @@ class LLMRecommendationGenerator:
 				trainer.add_callback(EnhancedMLflowCallback())
 				trainer.add_callback(GenerationQualityCallback(self.tokenizer, num_samples=2))
 				trainer.add_callback(CustomCheckpointCallback(self.config.save_on_each_eval))
-				'''
 				trainer.add_callback(EarlyStoppingCallback(
 					early_stopping_patience=self.config.early_stopping_patience,
 					early_stopping_threshold=self.config.early_stopping_threshold
 				))
-				'''
 				training_start_info = {
 					"Total training steps": trainer.args.max_steps,
 					"Steps per epoch": len(tokenized_datasets["train"]) // (self.config.batch_size * self.config.gradient_accumulation_steps),
